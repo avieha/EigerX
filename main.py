@@ -31,26 +31,26 @@ def priceCheck(products: list, productPrices: list, productSold: list, soldPrice
     return counter
 
 
-def digit_summer(num):
+def recursive_digit_summer(num: int) -> int:
     """
     :param num: given number
     :return: sum of digits
-    >>> digit_summer(2347623)
+    >>> recursive_digit_summer(2347623)
     27
-    >>> digit_summer(123)
+    >>> recursive_digit_summer(123)
     6
-    >>> digit_summer(111)
+    >>> recursive_digit_summer(111)
     3
-    >>> digit_summer(0)
+    >>> recursive_digit_summer(0)
     0
-    >>> digit_summer(00000)
+    >>> recursive_digit_summer(00000)
     0
     """
     if int(num) == 0:
         return 0
     digit = num % 10
     num = int(num / 10)
-    return digit + digit_summer(num)
+    return digit + recursive_digit_summer(num)
 
 
 def sql_department():
@@ -92,6 +92,35 @@ def sql_department():
     mycursor.close()
     mydb.close()
     return
+
+
+def recursive_numeric_sequencer(sequence, maximum=0, count=0):
+    """
+    :param sequence: stream of numbers
+    :param maximum: the max value found yet
+    :param count: number of times max found
+    :return: max number and number of appearances
+    >>> recursive_numeric_sequencer("1 5 42 -376 5 19 5 3 42 2 0")
+    (42;2)
+    >>> recursive_numeric_sequencer("1 5 42 376 5 19 5 3 42 376 0")
+    (376;2)
+    >>> recursive_numeric_sequencer("1 5 2 5 -3 5 1 5 3 5 4 2 0")
+    (5;5)
+    >>> recursive_numeric_sequencer("1 0", 0, 0)
+    (1;1)
+    """
+    if sequence[0] == '0':
+        print("({};{})".format(maximum, count))
+        return
+    if int(sequence[0]) > maximum:
+        count = 0
+        maximum = int(sequence[0])
+    if int(sequence[0]) == maximum:
+        count += 1
+    if type(sequence) is str:
+        recursive_numeric_sequencer(sequence.split(" ")[1:], maximum, count)
+    else:
+        recursive_numeric_sequencer(sequence[1:], maximum, count)
 
 
 if __name__ == '__main__':
