@@ -70,16 +70,6 @@ def sql_department():
 
     mycursor = mydb.cursor()
 
-    # mycursor.execute("CREATE DATABASE mydatabase")
-    # mycursor.execute('''CREATE TABLE IF NOT EXISTS EMPLOYEE (ID integer primary key,
-    #         NAME varchar(100),SALARY integer,DEPT_ID varchar(125))''')
-    # mycursor.execute('''CREATE TABLE IF NOT EXISTS DEPARTMENT (ID integer primary key,
-    #         NAME varchar(100),LOCATION varchar(125))''')
-    # mycursor.execute("SHOW TABLES")
-    # mycursor.execute('''INSERT INTO DEPARTMENT(ID,NAME,LOCATION)
-    #      VALUES (5,'Management','Paris')''')
-    # mydb.commit()
-
     mycursor.execute('''SELECT department.name,COUNT(*) as num_of_employees 
     FROM employee
     INNER JOIN department ON department.id=employee.dept_id
